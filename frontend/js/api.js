@@ -1,5 +1,5 @@
 /* URL base da API. Troque pelo endereço do back-end no Railway ao fazer o deploy. */
-const API_URL = "https://pit-2-2-maicon-production.up.railway.app/api";
+const API_URL = "https://pit-2-2-maicon-production.up.railway.app";
 
 function tokenAdmin() {
   return localStorage.getItem("adminToken") || "";
