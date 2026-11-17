@@ -91,6 +91,7 @@ th { background: #fce6ef; }
   flex-wrap: wrap;
 }
 .badge { background: white; color: var(--rosa-escuro); border-radius: 20px; padding: 2px 9px; }
+.contador-obs { font-size: 12px; color: #888; }
 .status { font-weight: bold; padding: 4px 8px; border-radius: 5px; background: #eee; }
 .status-pago { background: #d9f0dd; color: #176b2b; }
 .status-entregue { background: #d9e8f5; color: #1d5c8a; }

@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("btn-calcular").addEventListener("click", async () => {
     const cep = document.getElementById("cep").value.replace(/\D/g, "");
     const saida = document.getElementById("resultado-frete");
+    if (cep.length !== 8) {
+      saida.className = "mensagem erro";
+      saida.textContent = "Digite os 8 números do CEP.";
+      return;
+    }
     try {
       const dados = await api.get("/frete/" + cep);
       freteCalculado = dados;
@@ -32,6 +37,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("form-checkout").addEventListener("submit", async (event) => {
     event.preventDefault();
     const saida = document.getElementById("resultado-pedido");
+    const whatsapp = document.getElementById("cliente-whatsapp").value.replace(/\D/g, "");
+    if (whatsapp.length < 10 || whatsapp.length > 11) {
+      saida.className = "mensagem erro";
+      saida.textContent = "Digite o WhatsApp com DDD (10 ou 11 números).";
+      return;
+    }
     if (!freteCalculado) {
       saida.className = "mensagem erro";
       saida.textContent = "Calcule o frete antes de finalizar.";

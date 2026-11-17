@@ -42,6 +42,7 @@ function alterarQuantidade(id, delta) {
 }
 
 function removerItem(id) {
+  if (!confirm("Tem certeza que deseja remover este item do carrinho?")) return;
   salvarCarrinho(lerCarrinho().filter(i => i.id !== id));
 }
 
@@ -81,6 +82,7 @@ function renderizarCarrinho(containerId) {
       <div>
         <input maxlength="50" placeholder="Observação (máx. 50)" value="${escapar(i.observacao)}"
                data-acao="obs" data-id="${i.id}">
+        <small class="contador-obs" data-contador="${i.id}">${i.observacao.length}/50</small>
       </div>
       <div>${money(i.preco * i.quantidade)}</div>
       <button class="btn-secondary" data-acao="remover" data-id="${i.id}">🗑 Remover</button>
@@ -97,7 +99,12 @@ function renderizarCarrinho(containerId) {
     });
   });
   container.querySelectorAll("input[data-acao='obs']").forEach(input => {
-    input.addEventListener("input", () => definirObservacao(Number(input.dataset.id), input.value));
+    input.addEventListener("input", () => {
+      const id = Number(input.dataset.id);
+      definirObservacao(id, input.value);
+      const contador = container.querySelector(`[data-contador="${id}"]`);
+      if (contador) contador.textContent = input.value.length + "/50";
+    });
   });
 }
 

@@ -1,15 +1,21 @@
 /* Vitrine: listagem, ordenação sem recarregar e adicionar ao carrinho. */
-async function carregarProdutos(ordenar) {
+async function carregarProdutos(ordenar, busca = "") {
   const Grid = document.getElementById("grid-produtos");
   if (!Grid) return;
   Grid.innerHTML = "<p>Carregando...</p>";
   try {
     const produtos = await api.get("/produtos" + (ordenar ? "?ordenar=" + ordenar : ""));
-    if (produtos.length === 0) {
-      Grid.innerHTML = "<p>Nenhum cupcake disponível no momento.</p>";
+    const termo = busca.trim().toLowerCase();
+    const visiveis = termo
+      ? produtos.filter(p => String(p.nome || "").toLowerCase().includes(termo))
+      : produtos;
+    if (visiveis.length === 0) {
+      Grid.innerHTML = termo
+        ? `<p>Nenhum cupcake encontrado para "${escapar(busca)}".</p>`
+        : "<p>Nenhum cupcake disponível no momento.</p>";
       return;
     }
-    Grid.innerHTML = produtos.map(p => `
+    Grid.innerHTML = visiveis.map(p => `
       <div class="card produto">
         <img src="${escapar(p.imagem_url || '')}" alt="${escapar(p.nome)}"
              onerror="this.style.display='none'">
@@ -36,9 +42,10 @@ async function carregarProdutos(ordenar) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const select = document.getElementById("ordenar");
-  carregarProdutos(select ? select.value : "");
-  if (select) {
-    select.addEventListener("change", () => carregarProdutos(select.value));
-  }
+  const busca = document.getElementById("busca");
+  const recarregar = () => carregarProdutos(select ? select.value : "", busca ? busca.value : "");
+  recarregar();
+  if (select) select.addEventListener("change", recarregar);
+  if (busca) busca.addEventListener("input", recarregar);
   renderizarCarrinho("carrinho-resumo");
 });
