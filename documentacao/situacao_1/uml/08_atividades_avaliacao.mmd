@@ -1,0 +1,16 @@
+flowchart TD
+    INICIO([Início]) --> DADOS[Cliente informa numero do pedido, nota e comentario]
+    DADOS --> EXISTE{Pedido existe?}
+    EXISTE -- Não --> E1[Erro: Pedido não encontrado]
+    E1 --> FIM([Fim])
+    EXISTE -- Sim --> ENTREGUE{Status é Entregue?}
+    ENTREGUE -- Não --> E2[Erro: Pedido ainda não foi entregue]
+    E2 --> FIM
+    ENTREGUE -- Sim --> PRODUTO{Produto está no pedido?}
+    PRODUTO -- Não --> E3[Erro: Produto não pertence ao pedido]
+    E3 --> FIM
+    PRODUTO -- Sim --> DUPLICADA{Ja existe avaliacao?}
+    DUPLICADA -- Sim --> E4[Erro: Produto já avaliado neste pedido]
+    E4 --> FIM
+    DUPLICADA -- Não --> SALVA[Salva nota de 1 a 5 e comentario]
+    SALVA --> OK([Avaliacao registrada])

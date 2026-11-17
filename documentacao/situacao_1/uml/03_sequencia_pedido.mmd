@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant C as Cliente
+    participant F as Front-end
+    participant A as API Flask
+    participant V as ViaCEP
+    participant B as Banco PostgreSQL
+    C->>F: Informa CEP e itens do carrinho
+    F->>A: GET /api/frete/{cep}
+    A->>V: Consulta endereco pelo CEP
+    V-->>A: Endereco + codigo IBGE
+    A->>B: SELECT codigo_ibge_loja
+    B-->>A: codigo_ibge_loja
+    alt IBGE diferente do da loja
+        A-->>F: Erro "Cidade não atendida"
+        F-->>C: Exibe "Cidade não atendida"
+    else IBGE igual
+        A-->>F: Endereco + frete R$ 20,00
+        F-->>C: Exibe endereco e frete
+    end
+    C->>F: Confirma pedido
+    F->>A: POST /api/pedidos (produto_id, quantidade, observacao, dados)
+    A->>B: SELECT preco e estoque dos produtos
+    B-->>A: Precos reais e estoque
+    A->>A: Recalcula valor_produtos, frete e total
+    A->>A: Higieniza observacao (max 50)
+    A->>B: INSERT pedido + itens (Aguardando Pagamento)
+    B-->>A: numero_pedido gerado
+    A-->>F: numero_pedido + chave PIX + WhatsApp
+    F-->>C: Exibe chave PIX e WhatsApp

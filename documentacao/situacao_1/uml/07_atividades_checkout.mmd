@@ -1,0 +1,16 @@
+flowchart TD
+    INICIO([Início]) --> CEP[Cliente informa CEP]
+    CEP --> VIA[API consulta ViaCEP]
+    VIA --> IBGE{IBGE do CEP é igual ao da loja?}
+    IBGE -- Não --> ERRO[Exibe: Cidade não atendida]
+    ERRO --> FIM1([Fim: checkout bloqueado])
+    IBGE -- Sim --> ENDERECO[Exibe endereco e frete R$ 20,00]
+    ENDERECO --> CARRINHO[Revisa carrinho]
+    CARRINHO --> ESTOQUE{Estoque suficiente?}
+    ESTOQUE -- Não --> AJUSTA[Cliente ajusta quantidade]
+    AJUSTA --> CARRINHO
+    ESTOQUE -- Sim --> PEDIDO[API recalcula precos e cria pedido]
+    PEDIDO --> STATUS[Status: Aguardando Pagamento]
+    STATUS --> PIX[Exibe chave PIX e WhatsApp]
+    PIX --> COMP[Cliente envia comprovante pelo WhatsApp]
+    COMP --> FIM2([Fim])

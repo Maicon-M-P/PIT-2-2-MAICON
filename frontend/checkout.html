@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout - Loja de Cupcakes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🧁 Loja de Cupcakes</h1>
+    <nav>
+      <a href="index.html">Vitrine</a>
+      <a href="checkout.html">Carrinho (<span id="badge-carrinho" class="badge">0</span>)</a>
+      <a href="acompanhar.html">Acompanhar pedido</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Finalizar pedido</h2>
+    <div class="card">
+      <h3>Resumo do pedido</h3>
+      <div id="resumo-pedido"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Entrega</h3>
+      <p id="config-loja"><small>Carregando configurações da loja...</small></p>
+      <label>CEP</label>
+      <input id="cep" maxlength="8" placeholder="83702000">
+      <button id="btn-calcular" type="button">Calcular frete</button>
+      <div id="resultado-frete"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Dados do cliente</h3>
+      <form id="form-checkout">
+        <label>Nome</label>
+        <input id="cliente-nome" required>
+        <label>WhatsApp (com DDD)</label>
+        <input id="cliente-whatsapp" required>
+        <label>Número do endereço</label>
+        <input id="endereco-numero" required>
+        <label>Complemento</label>
+        <input id="endereco-complemento">
+        <label>Rua (preenchida pelo CEP)</label>
+        <input id="endereco-rua" readonly>
+        <label>Bairro (preenchido pelo CEP)</label>
+        <input id="endereco-bairro" readonly>
+        <label>Cidade (preenchida pelo CEP)</label>
+        <input id="endereco-cidade" readonly>
+        <button type="submit">Finalizar pedido</button>
+      </form>
+      <div id="resultado-pedido"></div>
+    </div>
+  </main>
+
+  <footer>Projeto PIT 2 - Loja de Cupcakes gourmet</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

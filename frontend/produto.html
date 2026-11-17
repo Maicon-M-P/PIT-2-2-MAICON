@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalhes do produto - Loja de Cupcakes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🧁 Loja de Cupcakes</h1>
+    <nav>
+      <a href="index.html">Vitrine</a>
+      <a href="checkout.html">Carrinho (<span id="badge-carrinho" class="badge">0</span>)</a>
+      <a href="acompanhar.html">Acompanhar pedido</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main id="detalhe">
+    <div class="card" style="display:flex; gap:20px; flex-wrap:wrap">
+      <img id="foto-produto" src="" alt="" style="width:260px; height:220px; object-fit:cover; border-radius:8px">
+      <div>
+        <h2 id="titulo-produto">Carregando...</h2>
+        <div id="media" class="preco"></div>
+        <p><strong>Descrição:</strong> <span id="desc-produto"></span></p>
+        <p><strong>Ingredientes:</strong> <span id="ingredientes"></span></p>
+        <p><strong>Peso:</strong> <span id="peso"></span></p>
+        <div id="preco-produto" class="preco"></div>
+        <p><button id="adicionar">Adicionar ao carrinho</button></p>
+      </div>
+    </div>
+
+    <h2>Você também pode gostar</h2>
+    <div id="acompanhamentos" class="grid"></div>
+
+    <h2>Avaliações</h2>
+    <div class="card">
+      <div id="lista-avaliacoes"></div>
+      <h3>Avalie este produto</h3>
+      <p><small>Informe o número de um pedido entregue que contenha este cupcake. Não é preciso login.</small></p>
+      <form id="form-avaliacao">
+        <label>Número do pedido</label>
+        <input id="numero-pedido" required placeholder="CUP-1001">
+        <label>Nota (1 a 5)</label>
+        <input id="nota" type="number" min="1" max="5" required>
+        <label>Comentário</label>
+        <textarea id="comentario" rows="3"></textarea>
+        <button type="submit">Enviar avaliação</button>
+      </form>
+      <div id="msg-avaliacao"></div>
+    </div>
+  </main>
+
+  <footer>Projeto PIT 2 - Loja de Cupcakes gourmet</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/produto.js"></script>
+</body>
+</html>

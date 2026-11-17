@@ -1,0 +1,10 @@
+erDiagram
+    CONFIGURACOES_LOJA { int id PK }
+    PRODUTO { int id PK string nome decimal preco int estoque }
+    PEDIDO { int id PK string numero_pedido string status }
+    ITEM_PEDIDO { int id PK int quantidade }
+    AVALIACAO { int id PK int nota }
+    PEDIDO ||--|{ ITEM_PEDIDO : "contém"
+    PRODUTO ||--o{ ITEM_PEDIDO : "aparece em"
+    PEDIDO ||--o{ AVALIACAO : "recebe"
+    PRODUTO ||--o{ AVALIACAO : "é avaliado"

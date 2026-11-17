@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acompanhar pedido - Loja de Cupcakes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🧁 Loja de Cupcakes</h1>
+    <nav>
+      <a href="index.html">Vitrine</a>
+      <a href="checkout.html">Carrinho (<span id="badge-carrinho" class="badge">0</span>)</a>
+      <a href="acompanhar.html">Acompanhar pedido</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Acompanhar pedido</h2>
+    <div class="card">
+      <p>Informe o número do pedido para ver o status. Não é necessário criar conta.</p>
+      <form id="form-acompanhar">
+        <label>Número do pedido</label>
+        <input id="numero" required placeholder="CUP-1001">
+        <button type="submit">Buscar pedido</button>
+      </form>
+    </div>
+    <div id="resultado" style="margin-top:16px"></div>
+  </main>
+
+  <footer>Projeto PIT 2 - Loja de Cupcakes gourmet</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/acompanhar.js"></script>
+</body>
+</html>

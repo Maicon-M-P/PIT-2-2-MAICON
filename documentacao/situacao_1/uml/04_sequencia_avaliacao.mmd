@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant C as Cliente
+    participant F as Front-end
+    participant A as API Flask
+    participant B as Banco PostgreSQL
+    C->>F: Informa numero do pedido, nota e comentario
+    F->>A: POST /api/avaliacoes
+    A->>B: SELECT pedido WHERE numero_pedido
+    B-->>A: Pedido encontrado
+    alt Pedido inexistente
+        A-->>F: Erro "Pedido não encontrado"
+    else Status diferente de Entregue
+        A-->>F: Erro "Pedido ainda não foi entregue"
+    else Produto nao esta no pedido
+        A-->>F: Erro "Produto não pertence ao pedido"
+    else Ja existe avaliacao
+        A-->>F: Erro "Produto já avaliado neste pedido"
+    else Tudo valido
+        A->>B: INSERT avaliacao (nota 1 a 5, comentario)
+        B-->>A: Avaliacao salva
+        A-->>F: 201 Created
+        F-->>C: Exibe mensagem de sucesso
+    end

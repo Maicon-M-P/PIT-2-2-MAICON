@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel Administrativo - Loja de Cupcakes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🧁 Painel Administrativo</h1>
+    <nav><a href="index.html">Voltar à loja</a></nav>
+  </header>
+
+  <main>
+    <div id="login" class="card">
+      <h2>Login do administrador</h2>
+      <form id="form-login">
+        <label>Usuário</label>
+        <input id="usuario" required>
+        <label>Senha</label>
+        <input id="senha" type="password" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <div id="msg-login"></div>
+    </div>
+
+    <div id="painel" class="hidden">
+      <p><button id="btn-sair" class="btn-secondary">Sair</button></p>
+
+      <h2>Produtos</h2>
+      <div class="card">
+        <form id="form-produto">
+          <input type="hidden" id="produto-id">
+          <label>Nome</label><input id="nome" required>
+          <label>Descrição</label><textarea id="descricao" rows="2"></textarea>
+          <label>Ingredientes</label><input id="ingredientes" required>
+          <label>Peso (g)</label><input id="peso_gramas" type="number">
+          <label>Preço</label><input id="preco" type="number" step="0.01" required>
+          <label>Estoque</label><input id="estoque" type="number" required>
+          <label><input type="checkbox" id="is_acompanhamento" style="width:auto"> É acompanhamento</label>
+          <label>Foto (opcional na edição)</label><input id="imagem" type="file" accept="image/*">
+          <button type="submit">Salvar produto</button>
+        </form>
+        <div id="msg-produto"></div>
+        <table>
+          <thead><tr><th>ID</th><th>Nome</th><th>Preço</th><th>Estoque</th><th>Acomp.</th><th>Ações</th></tr></thead>
+          <tbody id="tabela-produtos"></tbody>
+        </table>
+      </div>
+
+      <h2>Pedidos</h2>
+      <div class="card">
+        <div id="msg-pedidos"></div>
+        <table>
+          <thead><tr><th>Número</th><th>Cliente</th><th>Total</th><th>Status</th><th>Alterar status</th></tr></thead>
+          <tbody id="tabela-pedidos"></tbody>
+        </table>
+      </div>
+
+      <h2>Configurações da loja</h2>
+      <div class="card">
+        <form id="form-config">
+          <label>Chave PIX</label><input id="chave-pix" required>
+          <label>WhatsApp</label><input id="whatsapp" required>
+          <label>CEP da loja</label><input id="cep-loja" required>
+          <button type="submit">Salvar configurações</button>
+        </form>
+        <div id="msg-config"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Projeto PIT 2 - Loja de Cupcakes gourmet</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

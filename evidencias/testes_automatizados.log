@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/ia/Área de trabalho/Projeto PIT 2/PIT 2-2 MAICON
+collecting ... collected 10 items
+
+backend/tests/test_api.py::test_frete_cidade_atendida PASSED             [ 10%]
+backend/tests/test_api.py::test_frete_outra_cidade PASSED                [ 20%]
+backend/tests/test_api.py::test_preco_negativo_no_cadastro PASSED        [ 30%]
+backend/tests/test_api.py::test_pedido_recalcula_totais_no_servidor PASSED [ 40%]
+backend/tests/test_api.py::test_acompanhamento_aguardando_mostra_pix PASSED [ 50%]
+backend/tests/test_api.py::test_baixa_estoque_ao_marcar_como_pago PASSED [ 60%]
+backend/tests/test_api.py::test_sem_baixa_estoque_em_outro_status PASSED [ 70%]
+backend/tests/test_api.py::test_avaliacao_so_com_pedido_entregue PASSED  [ 80%]
+backend/tests/test_api.py::test_avaliacao_pedido_entregue PASSED         [ 90%]
+backend/tests/test_api.py::test_admin_sem_token_e_bloqueado PASSED       [100%]
+
+============================== 10 passed in 1.76s ==============================

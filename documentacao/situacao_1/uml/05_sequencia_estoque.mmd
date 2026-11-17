@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant AD as Administrador
+    participant F as Painel Admin
+    participant A as API Flask
+    participant B as Banco PostgreSQL
+    AD->>F: Seleciona pedido e novo status
+    F->>A: PATCH /api/admin/pedidos/{id}/status
+    alt Novo status = Pago / Em Preparo
+        A->>B: SELECT estoque de cada item do pedido
+        B-->>A: Estoque atual
+        alt Estoque insuficiente
+            A-->>F: Erro "Estoque insuficiente"
+            F-->>AD: Exibe erro
+        else Estoque suficiente
+            A->>B: UPDATE produtos SET estoque = estoque - quantidade
+            A->>B: UPDATE pedidos SET status = 'Pago / Em Preparo'
+            B-->>A: OK
+            A-->>F: Pedido atualizado
+        end
+    else Outro status
+        A->>B: UPDATE pedidos SET status
+        A-->>F: Pedido atualizado
+    end
+    F-->>AD: Exibe novo status

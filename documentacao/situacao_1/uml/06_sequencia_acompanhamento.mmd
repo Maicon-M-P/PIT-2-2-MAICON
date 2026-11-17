@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant C as Cliente
+    participant F as Front-end
+    participant A as API Flask
+    participant B as Banco PostgreSQL
+    C->>F: Digita numero do pedido
+    F->>A: GET /api/pedidos/{numero_pedido}
+    A->>B: SELECT pedido, itens e total
+    B-->>A: Dados do pedido
+    alt Pedido inexistente
+        A-->>F: Erro "Pedido não encontrado"
+        F-->>C: Exibe "Pedido não encontrado"
+    else Status = Aguardando Pagamento
+        A-->>F: Status + WhatsApp + chave PIX
+        F-->>C: Exibe "Enviar comprovante para o número WhatsApp" + chave PIX
+    else Status = Pago ou posterior
+        A-->>F: Status + itens + total
+        F-->>C: Exibe status atual (sem mensagem de comprovante)
+    end

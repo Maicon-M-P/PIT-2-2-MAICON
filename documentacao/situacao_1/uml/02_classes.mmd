@@ -1,0 +1,78 @@
+classDiagram
+    class Produto {
+        +int id
+        +string nome
+        +string descricao
+        +string ingredientes
+        +int peso_gramas
+        +decimal preco
+        +int estoque
+        +boolean is_acompanhamento
+        +string imagem_url
+        +datetime criado_em
+        +listar() Produto
+        +buscarPorId() Produto
+        +listarAcompanhamentos() Produto
+    }
+    class Pedido {
+        +int id
+        +string numero_pedido
+        +string cliente_nome
+        +string cliente_whatsapp
+        +string cep
+        +decimal valor_produtos
+        +decimal valor_frete
+        +decimal valor_total
+        +string status
+        +datetime criado_em
+        +criar() Pedido
+        +buscarPorNumero() Pedido
+        +alterarStatus() void
+        +baixarEstoque() void
+    }
+    class ItemPedido {
+        +int id
+        +int pedido_id
+        +int produto_id
+        +int quantidade
+        +decimal preco_unitario
+        +string observacao
+    }
+    class Avaliacao {
+        +int id
+        +int produto_id
+        +int pedido_id
+        +int nota
+        +string comentario
+        +datetime criado_em
+        +validarPedido() boolean
+        +salvar() Avaliacao
+    }
+    class ConfiguracaoLoja {
+        +int id
+        +string chave_pix
+        +string whatsapp
+        +string cep_loja
+        +string codigo_ibge_loja
+        +atualizar() void
+    }
+    class ProdutoController { +get_produtos() json +get_produto(id) json }
+    class PedidoController { +post_pedidos() json +get_pedido(numero) json }
+    class FreteController { +get_frete(cep) json }
+    class AvaliacaoController { +post_avaliacao() json }
+    class AdminController { +login() json +crud_produtos() json +crud_pedidos() json +config_loja() json }
+    class BancoDados { +conectar() connection +consultar() rows +executar() void }
+    class SupabaseStorage { +upload(imagem) url }
+
+    ProdutoController --> Produto
+    PedidoController --> Pedido
+    FreteController --> ConfiguracaoLoja
+    AvaliacaoController --> Avaliacao
+    AdminController --> BancoDados
+    AdminController --> SupabaseStorage
+    ProdutoController --> BancoDados
+    PedidoController --> BancoDados
+    Pedido "1" --> "*" ItemPedido
+    Produto "1" --> "*" ItemPedido
+    Pedido "1" --> "*" Avaliacao
+    Produto "1" --> "*" Avaliacao

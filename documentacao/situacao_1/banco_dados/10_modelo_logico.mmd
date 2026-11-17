@@ -1,0 +1,57 @@
+erDiagram
+    CONFIGURACOES_LOJA {
+        int id PK
+        text chave_pix
+        varchar whatsapp
+        varchar cep_loja
+        varchar codigo_ibge_loja
+    }
+    PRODUTOS {
+        serial id PK
+        varchar nome
+        text descricao
+        text ingredientes
+        int peso_gramas
+        numeric preco
+        int estoque
+        boolean is_acompanhamento
+        text imagem_url
+        timestamp criado_em
+    }
+    PEDIDOS {
+        serial id PK
+        varchar numero_pedido UK
+        varchar cliente_nome
+        varchar cliente_whatsapp
+        varchar cep
+        varchar endereco_rua
+        varchar endereco_numero
+        varchar endereco_complemento
+        varchar endereco_bairro
+        varchar endereco_cidade
+        numeric valor_produtos
+        numeric valor_frete
+        numeric valor_total
+        varchar status
+        timestamp criado_em
+    }
+    ITENS_PEDIDO {
+        serial id PK
+        int pedido_id FK
+        int produto_id FK
+        int quantidade
+        numeric preco_unitario
+        varchar observacao
+    }
+    AVALIACOES {
+        serial id PK
+        int produto_id FK
+        int pedido_id FK
+        int nota
+        text comentario
+        timestamp criado_em
+    }
+    PEDIDOS ||--|{ ITENS_PEDIDO : "id -> pedido_id"
+    PRODUTOS ||--o{ ITENS_PEDIDO : "id -> produto_id"
+    PEDIDOS ||--o{ AVALIACOES : "id -> pedido_id"
+    PRODUTOS ||--o{ AVALIACOES : "id -> produto_id"
