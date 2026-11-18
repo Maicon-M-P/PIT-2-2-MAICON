@@ -1,6 +1,6 @@
 # Loja de Cupcakes — PIT 2 (Engenharia de Software II)
 
-Projeto Full Stack Júnior: venda de cupcakes gourmet com vitrine, carrinho,
+Projeto de venda de cupcakes gourmet com vitrine, carrinho,
 checkout com frete via ViaCEP, pagamento PIX estático + WhatsApp,
 acompanhamento de pedido e painel administrativo.
 
